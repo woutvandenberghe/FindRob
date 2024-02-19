@@ -32,10 +32,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import be.arnewittouck.mymuseumapp.ui.loginscreen.LoginScreen
+import be.arnewittouck.mymuseumapp.ui.registerscreen.RegisterScreen
+import be.vives.findrobert.data.MyConfiguration
 
-enum class ReceptenScreen(@StringRes val title: Int) {
+enum class FindRobertScreens(@StringRes val title: Int) {
     Login(title = R.string.login),
-    Registreer(title = R.string.registreer),
+    Register(title = R.string.registreer),
     Main(title = R.string.main),
     Scanner(title = R.string.scanner),
     Admin(title = R.string.admin)
@@ -71,7 +74,7 @@ fun ReceptenAppBar(
                 if(MyConfiguration.loggedInUser != null){
                     IconButton(onClick = {
                         MyConfiguration.loggedInUser = null
-                        navController.navigate(ReceptenScreen.Login.name)
+                        navController.navigate(FindRobertScreens.Login.name)
                     }) {
                         Icon(imageVector = Icons.Filled.ExitToApp, contentDescription = null)
                     }
@@ -84,11 +87,11 @@ fun ReceptenAppBar(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ReceptenApp(navController: NavHostController = rememberNavController(), viewModel: SharedViewModel = viewModel(),) {
+fun FindRobApp(navController: NavHostController = rememberNavController()) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
-    val currentScreen = ReceptenScreen.valueOf(
-        backStackEntry?.destination?.route ?: ReceptenScreen.Login.name
+    val currentScreen = FindRobertScreens.valueOf(
+        backStackEntry?.destination?.route ?: FindRobertScreens.Login.name
     )
 
     Scaffold(
@@ -99,77 +102,33 @@ fun ReceptenApp(navController: NavHostController = rememberNavController(), view
                 navController = navController,
                 navigateUp = { navController.navigateUp() }
             )
-
-        },
-        bottomBar = {
-            BottomAppBar(
-            ) {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                    if (MyConfiguration.loggedInUser != null) {
-                        IconButton(onClick = { navController.navigate(ReceptenScreen.Genereer.name) }) {
-                            Icon(Icons.Filled.AddCircle, contentDescription = null)
-                        }
-                        IconButton(onClick = { navController.navigate(ReceptenScreen.Favorieten.name) }) {
-                            Icon(Icons.Filled.Star, contentDescription = null)
-                        }
-                    }
-                }
-            }
         }
     ) {
         NavHost(
             navController = navController,
-            startDestination = ReceptenScreen.Login.name
+            startDestination = FindRobertScreens.Login.name
         ) {
-            composable(route = ReceptenScreen.Login.name) {
+            composable(route = FindRobertScreens.Login.name) {
                 LoginScreen(
-                    modifier = Modifier,
-                    loginSuccessFull = {
-                        navController.navigate(ReceptenScreen.Genereer.name)
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    onLoginValid = {
+                        navController.popBackStack()
+                        navController.navigate(FindRobertScreens.Main.name)
                     },
-                    register = {
-                        navController.navigate(ReceptenScreen.Registreer.name)
-                    }
-
-
-                )
-            }
-            composable(route = ReceptenScreen.Registreer.name) {
-                RegistreerScreen(
-                    modifier = Modifier,
-                    goToLogin = {
-                        navController.navigate(ReceptenScreen.Login.name)
+                    onRegisterButtonClicked = {
+                        navController.navigate(FindRobertScreens.Register.name)
                     }
                 )
             }
-            composable(route = ReceptenScreen.Genereer.name) {
-                GenereerReceptScreen(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(10.dp),
-                    goToReceptInfo = {
-                        navController.navigate(ReceptenScreen.ReceptInfo.name)
-                    },
-                    viewModel = viewModel
-                )
-            }
-            composable(route = ReceptenScreen.ReceptInfo.name) {
-                ReceptInfoScreen(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(10.dp),
-                    viewModel = viewModel
-                )
-            }
-            composable(route = ReceptenScreen.Favorieten.name) {
-                FavorietenScreen(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(10.dp),
-                    goToReceptInfo = {
-                        navController.navigate(ReceptenScreen.ReceptInfo.name)
-                    },
-                    viewModel = viewModel
+            composable(route = FindRobertScreens.Register.name) {
+                RegisterScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    navigateToMainScreen = {
+                        navController.popBackStack()
+                        navController.popBackStack()
+                        navController.navigate(FindRobertScreens.Main.name)
+                    }
                 )
             }
         }
