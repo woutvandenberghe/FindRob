@@ -4,15 +4,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import be.arnewittouck.mymuseumapp.data.MyConfiguration
-import be.arnewittouck.mymuseumapp.data.UserDbItem
-import be.arnewittouck.mymuseumapp.data.UsersRepository
+import be.vives.findrobert.data.MyConfiguration
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 
-class LoginScreenViewModel(private val usersRepository: UsersRepository): ViewModel() {
+class LoginScreenViewModel(/** private val usersRepository: UsersRepository **/): ViewModel() {
 
     var username by mutableStateOf("")
     var password by mutableStateOf("")
@@ -32,7 +30,7 @@ class LoginScreenViewModel(private val usersRepository: UsersRepository): ViewMo
     }
 
     suspend fun loginFunction(): Boolean {
-        val list: List<UserDbItem> = usersRepository.getAllUsersStream().firstOrNull()!!
+        /** val list: List<UserDbItem> = usersRepository.getAllUsersStream().firstOrNull()!!
         var found = false
         var i = 0
         while (!found && i < list.size) {
@@ -48,9 +46,12 @@ class LoginScreenViewModel(private val usersRepository: UsersRepository): ViewMo
         }
         setIsError(true)
         return false
+        **/
+        assignLoggedInUserToMyConfiguration("Username")
+        return true
     }
 
-    private fun assignLoggedInUserToMyConfiguration(user: UserDbItem) {
+    private fun assignLoggedInUserToMyConfiguration(user: String) {
         MyConfiguration.loggedInUser = user
     }
 }

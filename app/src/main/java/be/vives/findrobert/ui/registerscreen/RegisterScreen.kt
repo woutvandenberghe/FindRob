@@ -21,14 +21,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import be.vives.findrobert.R
-import be.vives.findrobert.ui.AppViewModelProvider
 import be.vives.findrobert.ui.components.MyTextField
 import be.vives.findrobert.ui.components.RegisterScreenDialog
 import kotlinx.coroutines.launch
 
 @Composable
 fun RegisterScreen(modifier: Modifier = Modifier,
-                   viewmodel: RegisterScreenViewModel = viewModel(factory = AppViewModelProvider.Factory),
+                   viewmodel: RegisterScreenViewModel = viewModel(/** factory = AppViewModelProvider.Factory **/),
                    navigateToMainScreen: () -> Unit)
 {
     val coroutineScope = rememberCoroutineScope()

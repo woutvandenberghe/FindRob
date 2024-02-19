@@ -12,7 +12,7 @@ import be.vives.findrobert.FindRobApplication
 /**
  * Provides Factory to create instance of ViewModel for the entire Inventory app
  */
-object AppViewModelProvider {
+/** object AppViewModelProvider {
     val Factory = viewModelFactory {
 
         initializer {
@@ -22,7 +22,7 @@ object AppViewModelProvider {
             LoginScreenViewModel(findRobApplication().container.usersRepository)
         }
     }
-}
+} **/
 
 /**
  * Extension function to queries for [Application] object and returns an instance of

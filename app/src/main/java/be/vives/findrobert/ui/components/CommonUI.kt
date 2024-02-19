@@ -29,57 +29,30 @@ fun MainScreenButton(
     buttonImage: Painter
 )
 {
-    if (isSystemInDarkTheme()) {
-        Button(
-            onClick = onButtonClicked,
+    Button(
+        onClick = onButtonClicked,
+        modifier = Modifier
+            .width(130.dp)
+            .height(130.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = Color(226,68,64,255)))
+    {
+        Image(painter = buttonImage,
+            contentDescription = stringResource(id = R.string.main_screen_buttons),
             modifier = Modifier
-                .width(130.dp)
-                .height(130.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(188,106,88,255)))
-        {
-            Image(painter = buttonImage,
-                contentDescription = stringResource(id = R.string.main_screen_buttons),
-                modifier = Modifier
-                    .height(100.dp)
-                    .width(100.dp))
-        }
-    } else {
-        Button(
-            onClick = onButtonClicked,
-            modifier = Modifier
-                .width(130.dp)
-                .height(130.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(208,126,108,255)))
-        {
-            Image(painter = buttonImage,
-                contentDescription = stringResource(id = R.string.main_screen_buttons),
-                modifier = Modifier
-                    .height(100.dp)
-                    .width(100.dp))
-        }
+                .height(100.dp)
+                .width(100.dp))
     }
 }
 
 @Composable
 fun LoginScreenButton(onClick: () -> Unit, buttonText: String) {
-    if (isSystemInDarkTheme()) {
-        Button(
-            onClick = onClick,
-            modifier = Modifier.width(150.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(188,106,88,255),
-                contentColor = Color.White)
-        ) {
-            Text(buttonText)
-        }
-    } else {
-        Button(
-            onClick = onClick,
-            modifier = Modifier.width(150.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(208,126,108,255),
-                contentColor = Color.White)
-        ) {
-            Text(buttonText)
-        }
+    Button(
+        onClick = onClick,
+        modifier = Modifier.width(150.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = Color(226,68,64,255),
+            contentColor = Color.White)
+    ) {
+        Text(buttonText)
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)

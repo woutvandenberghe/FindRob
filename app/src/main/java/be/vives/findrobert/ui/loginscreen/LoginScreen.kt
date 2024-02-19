@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -23,19 +24,18 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import be.arnewittouck.mymuseumapp.R
-import be.arnewittouck.mymuseumapp.ui.AppViewModelProvider
-import be.arnewittouck.mymuseumapp.ui.components.LoginScreenButton
-import be.arnewittouck.mymuseumapp.ui.components.MyTextField
+import be.vives.findrobert.R
+import be.vives.findrobert.ui.components.LoginScreenButton
+import be.vives.findrobert.ui.components.MyTextField
 import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier,
-                viewmodel: LoginScreenViewModel = viewModel(factory = AppViewModelProvider.Factory),
+                viewmodel: LoginScreenViewModel = viewModel(/** factory = AppViewModelProvider.Factory **/),
                 onLoginValid: () -> Unit,
                 onRegisterButtonClicked: () -> Unit) {
 
-    val image = painterResource(R.drawable.museum_app_icon)
+    val image = painterResource(R.drawable.gnome_icon)
     val coroutineScope = rememberCoroutineScope()
 
     Column(modifier = Modifier
@@ -90,6 +90,7 @@ fun LoginScreen(modifier: Modifier = Modifier,
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyPasswordTextField(value: String, onValueChange: (String) -> Unit, label : String, modifier: Modifier = Modifier, isError: Boolean) {
     TextField(value = value,
