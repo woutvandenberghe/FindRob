@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FindRobert</string>
+    <string name="login">login</string>
+    <string name="registreer">registreer</string>
+    <string name="main">main</string>
+    <string name="scanner">scanner</string>
+    <string name="admin">admin</string>
 </resources>
