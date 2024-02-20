@@ -31,6 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import be.arnewittouck.mymuseumapp.ui.loginscreen.LoginScreen
 import be.arnewittouck.mymuseumapp.ui.registerscreen.RegisterScreen
 import be.vives.findrobert.data.MyConfiguration
+import be.vives.findrobert.ui.mainScreen.MainScreen
 
 enum class FindRobertScreens(@StringRes val title: Int) {
     Login(title = R.string.login),
@@ -124,6 +125,11 @@ fun FindRobApp(navController: NavHostController = rememberNavController()) {
                         navController.popBackStack()
                         navController.navigate(FindRobertScreens.Main.name)
                     }
+                )
+            }
+            composable(route = FindRobertScreens.Main.name) {
+                MainScreen(
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }
