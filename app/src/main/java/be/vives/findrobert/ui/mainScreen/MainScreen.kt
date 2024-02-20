@@ -87,7 +87,7 @@ fun MainScreen(modifier: Modifier, mainScreenViewModel: MainScreenViewModel) {
 @Composable
 fun FoundButton(modifier: Modifier) {
     Button(
-        onClick = {},
+        onClick = {modifier},
         modifier = Modifier.width(150.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(226,68,64,255),

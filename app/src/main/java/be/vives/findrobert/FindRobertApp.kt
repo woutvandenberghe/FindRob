@@ -83,7 +83,7 @@ fun FindRobertAppBar(
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FindRobApp(navController: NavHostController = rememberNavController()) {
+fun FindRobApp(navController: NavHostController = rememberNavController(), function: () -> Unit) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = FindRobertScreens.valueOf(
@@ -135,7 +135,7 @@ fun FindRobApp(navController: NavHostController = rememberNavController()) {
             }
             composable(route = FindRobertScreens.Scanner.name) {
                 ScannerCompose(
-                    function = //Insert function hier Wout
+                    function = function
                 )
             }
         }
