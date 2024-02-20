@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
 
     private val barCodeLauncher = registerForActivityResult(ScanContract())
     {
-        result ->
+            result ->
         if(result.contents == null)
         {
             Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
         ActivityResultContracts.RequestPermission()
     )
     {
-        isGranted ->
+            isGranted ->
         if(isGranted)
         {
             showCamera()
@@ -62,10 +62,10 @@ class MainActivity : ComponentActivity() {
     public fun checkCameraPermission(context: Context)
     {
         if(ContextCompat.checkSelfPermission(
-            context,
-            android.Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
-            )
+                context,
+                android.Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        )
         {
             showCamera()
         }
@@ -104,4 +104,3 @@ fun GreetingPreview() {
         FindRobApp(function = { checkCameraPermission(context = applicationContext) })
     }
 }*/
-
