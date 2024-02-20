@@ -2,17 +2,13 @@ package be.vives.findrobert
 
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ExitToApp
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.BottomAppBar
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -20,13 +16,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -46,46 +42,44 @@ enum class FindRobertScreens(@StringRes val title: Int) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ReceptenAppBar(
-    @StringRes currentScreenTitle: Int,
+fun FindRobertAppBar(
+    currentScreen: FindRobertScreens,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
-    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    Row {
-        CenterAlignedTopAppBar(
-            title = { Text(stringResource(currentScreenTitle)) },
-            colors = TopAppBarDefaults.mediumTopAppBarColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer
-            ),
-            modifier = modifier,
-            navigationIcon = {
-                if (canNavigateBack && MyConfiguration.loggedInUser != null) {
-                    IconButton(onClick = navigateUp) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.back)
-                        )
-                    }
-                }
-            },
-            actions = {
-                if(MyConfiguration.loggedInUser != null){
-                    IconButton(onClick = {
-                        MyConfiguration.loggedInUser = null
-                        navController.navigate(FindRobertScreens.Login.name)
-                    }) {
-                        Icon(imageVector = Icons.Filled.ExitToApp, contentDescription = null)
-                    }
+    TopAppBar(
+        title =
+        {
+            if (currentScreen == FindRobertScreens.Main) {
+                Text(stringResource(currentScreen.title)
+                    /**+ ( MyConfiguration.loggedInUser?.firstName ?: stringResource(id = R.string.empty))
+                        + stringResource(id = R.string.space)
+                        + (MyConfiguration.loggedInUser?.lastName ?: stringResource(id = R.string.empty))**/
+                    , color = Color.White
+                )
+            } else {
+                Text(stringResource(currentScreen.title), color = Color.White)
+            }
+        },
+        colors = TopAppBarDefaults.mediumTopAppBarColors(
+            containerColor = Color(226,68,64,255)
+        ),
+        modifier = modifier,
+        navigationIcon = {
+            if (canNavigateBack) {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.back_button)
+                    )
                 }
             }
-        )
-    }
+        }
+    )
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FindRobApp(navController: NavHostController = rememberNavController()) {
     val navController = rememberNavController()
@@ -96,11 +90,12 @@ fun FindRobApp(navController: NavHostController = rememberNavController()) {
 
     Scaffold(
         topBar = {
-            ReceptenAppBar(
-                currentScreenTitle = currentScreen.title,
-                canNavigateBack = navController.previousBackStackEntry != null,
-                navController = navController,
-                navigateUp = { navController.navigateUp() }
+            FindRobertAppBar(
+                currentScreen = currentScreen,
+                canNavigateBack = (navController.previousBackStackEntry != null),
+                navigateUp = {
+                    navController.navigateUp()
+                }
             )
         }
     ) {

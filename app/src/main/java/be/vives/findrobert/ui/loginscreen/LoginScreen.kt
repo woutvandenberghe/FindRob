@@ -90,7 +90,6 @@ fun LoginScreen(modifier: Modifier = Modifier,
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyPasswordTextField(value: String, onValueChange: (String) -> Unit, label : String, modifier: Modifier = Modifier, isError: Boolean) {
     TextField(value = value,
