@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import be.vives.findrobert.R
 
 
-
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ScannerCompose(function: () -> Unit) {
