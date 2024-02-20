@@ -15,39 +15,46 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.vives.findrobert.R
+import com.journeyapps.barcodescanner.ScanOptions
+
+@Preview
+@Composable
+private fun ScannerScreen()
+{
+    ScannerCompose({ println("test") })
+}
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun scannerScreen()
-{
+fun ScannerCompose(function: () -> Unit) {
     Scaffold(
         bottomBar = {
             BottomAppBar(
                 actions = {},
                 floatingActionButton = {
-                    FloatingActionButton(onClick = { /*TODO*/ }) {
+                    FloatingActionButton(onClick = { function() }) {
                         Icon(painter = painterResource(id = R.drawable.qr_scan),
                             contentDescription = "QR Scan")
                     }
                 }
             )
         }
-    ) {
-        _ ->
-       Column(
-           modifier = Modifier.fillMaxSize(),
-           verticalArrangement = Arrangement.Center,
-           horizontalAlignment = Alignment.CenterHorizontally
-       )
-       {
+    ) { _ ->
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.qr_scan),
                 modifier = Modifier.size(100.dp),
                 contentDescription = "QR"
             )
-           Text(text="Scan")
-       }
+            Text(text = "Scan")
+        }
     }
 }

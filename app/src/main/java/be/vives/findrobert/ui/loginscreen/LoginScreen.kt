@@ -77,9 +77,10 @@ fun LoginScreen(modifier: Modifier = Modifier,
         {
             LoginScreenButton(onClick = {
                 coroutineScope.launch {
-                    if (viewmodel.loginFunction()) {
-                        onLoginValid()
-                    }
+//                    if (viewmodel.loginFunction()) {
+//                        onLoginValid()
+//                    }
+                    onLoginValid()
                 }
             }, buttonText = stringResource(id = R.string.login)
             )
