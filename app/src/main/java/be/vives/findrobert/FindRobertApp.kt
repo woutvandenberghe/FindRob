@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,6 +36,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import be.vives.findrobert.ui.adminscreen.AdminScreen
+import be.vives.findrobert.ui.eventscreen.EventScreen
 import be.vives.findrobert.ui.loginscreen.LoginScreen
 import be.vives.findrobert.ui.mainScreen.MainScreen
 import be.vives.findrobert.ui.registerscreen.RegisterScreen
@@ -47,7 +49,10 @@ enum class FindRobertScreens(@StringRes val title: Int) {
     Main(title = R.string.main),
     Scanner(title = R.string.scanner),
     Admin(title = R.string.admin),
-    Social(title = R.string.social_screen_title)
+    Social(title = R.string.social_screen_title),
+    Event(title = R.string.event),
+    Found(title = R.string.found),
+    WrongQR(title = R.string.wrongqr)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -105,7 +110,7 @@ fun FindRobertAppBar(
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FindRobApp(navController: NavHostController = rememberNavController(), function: () -> Unit) {
+fun FindRobApp(navController: NavHostController = rememberNavController(), function: () -> Unit, textResult: MutableState<String>) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = FindRobertScreens.valueOf(
@@ -131,13 +136,15 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
         bottomBar = {
             if (currentScreen == FindRobertScreens.Main) {
                 BottomAppBar(modifier = Modifier.height(65.dp), containerColor = Color(226,68,64,255)) {
-                    Row (modifier = Modifier.fillMaxWidth().height(45.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
+                    Row (modifier = Modifier
+                        .fillMaxWidth()
+                        .height(45.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
                         IconButton(onClick = { navController.navigate(FindRobertScreens.Social.name) }, ) {
                             Icon(imageVector = Icons.Default.Favorite,
                                 contentDescription = stringResource(id = R.string.friends_button)
                             )
                         }
-                        IconButton(onClick = { /*TODO*/ }, ) {
+                        IconButton(onClick = { navController.navigate(FindRobertScreens.Event.name) }, ) {
                             Icon(imageVector = Icons.Default.DateRange,
                                 contentDescription = stringResource(id = R.string.events_button)
                             )
@@ -186,16 +193,28 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
             composable(route = FindRobertScreens.Scanner.name) {
                 showAdmin = false;
                 ScannerCompose(
-                    function = function
+                    function = function,
+                    navController,
+                    textResult = textResult
                 )
             }
             composable(route = FindRobertScreens.Admin.name){
                 showAdmin = false;
-                AdminScreen()
+                AdminScreen(onChangeClicked = { resetMain(navController) })
             }
             composable(route = FindRobertScreens.Social.name){
                 SocialScreen()
             }
+            composable(route = FindRobertScreens.Event.name){
+                EventScreen()
+            }
+            composable(route = FindRobertScreens.Found.name){
+                FindRobertScreens.Found
+            }
         }
     }
+}
+fun resetMain(navController: NavHostController) {
+    navController.navigate(FindRobertScreens.Main.name)
+    navController.popBackStack(FindRobertScreens.Main.name, false)
 }

@@ -9,5 +9,6 @@ class OfflineAdminDataRepository (private val adminDataDao: AdminDataDao): Admin
 
     override suspend fun upsertData(data: AdminData) = adminDataDao.upsert(data)
     override suspend fun deleteData(data: AdminData) = adminDataDao.delete(data)
+    override suspend fun getHint() = adminDataDao.getHint()
 
 }

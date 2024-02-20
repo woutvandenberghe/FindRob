@@ -8,7 +8,6 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import be.vives.findrobert.FindRobApplication
 import be.vives.findrobert.ui.loginscreen.LoginScreenViewModel
 import be.vives.findrobert.ui.registerscreen.RegisterScreenViewModel
-import be.vives.findrobert.ui.socialscreen.SocialScreenViewModel
 
 /**
  * Provides Factory to create instance of ViewModel for the entire Inventory app
@@ -24,6 +23,9 @@ object AppViewModelProvider {
         }
         initializer {
             SocialScreenViewModel(findRobApplication().container.usersRepository)
+        }
+        initializer {
+            AdminScreenViewModel(findRobApplication().container.adminDataRepository)
         }
     }
 }
