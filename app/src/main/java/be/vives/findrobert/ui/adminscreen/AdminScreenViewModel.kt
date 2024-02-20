@@ -26,7 +26,7 @@ class AdminScreenViewModel(private val adminRepository: AdminDataRepository) : V
 
     init {
         viewModelScope.launch {
-            if (!adminRepository.getAllAdminData().first().isEmpty()) {
+            if (adminRepository.getAllAdminData().first().isNotEmpty()) {
                 adminDataList.add(adminRepository.getAllAdminData().first().first())
                 MyConfiguration.hint = adminRepository.getAllAdminData().first().first().hint
             }
@@ -44,7 +44,9 @@ class AdminScreenViewModel(private val adminRepository: AdminDataRepository) : V
                     nieuweHint,
                     location = "Robert ligt bij de eerste bom links van de Radio 2 gebouw aan de kant van de straat."
                 )
-                adminRepository.deleteData(adminDataList[0])
+                if (adminRepository.getAllAdminData().first().isNotEmpty()) {
+                    adminRepository.deleteData(adminDataList[0])
+                }
                 adminRepository.upsertData(adminData)
             }
         }
