@@ -24,77 +24,63 @@ import com.journeyapps.barcodescanner.ScanOptions
 
 class MainActivity : ComponentActivity() {
 
-    class MainActivity : ComponentActivity() {
+    private var textResult = mutableStateOf("")
 
-        // Code voor scanner
-        private var textResult = mutableStateOf("")
-        private val barCodeLaucnher = registerForActivityResult(ScanContract())
+    private val barCodeLauncher = registerForActivityResult(ScanContract())
+    {
+        result ->
+        if(result.contents == null)
         {
-                result ->
-            if(result.contents == null)
-            {
-                Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                textResult.value = result.contents
-            }
-        }
-        private fun showCamera(){
-            val options = ScanOptions()
-            options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
-            options.setPrompt("Scan QR")
-            options.setCameraId(0)
-            options.setBeepEnabled(true)
-            options.setOrientationLocked(false)
+            Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
 
-            barCodeLaucnher.launch(options)
-        }
-
-        private val requestPermissionLauncher = registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        )
-        {
-                isGranted ->
-            if(isGranted)
-            {
-                showCamera()
-            }
-        }
-        private fun checkCameraPermission(context: Context)
-        {
-            if(ContextCompat.checkSelfPermission(
-                    context,
-                    android.Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED)
-            {
-                showCamera()
-            }
-            else if(shouldShowRequestPermissionRationale(android.Manifest.permission.CAMERA))
-            {
-                Toast.makeText(this@MainActivity, "Camera required", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                requestPermissionLauncher.launch(android.Manifest.permission.CAMERA)
-            }
-        }
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContent {
-                window.statusBarColor = getColor(R.color.app_color)
-                FindRobertTheme {
-                    // A surface container using the 'background' color from the theme
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                    ) {
-                        ScannerCompose({ checkCameraPermission(applicationContext) })
-
-                    }
-                }
-            }
         }
     }
+
+    private fun showCamera()
+    {
+        val options = ScanOptions()
+        options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+        options.setPrompt("Scan a QR code")
+        options.setCameraId(0)
+        options.setBeepEnabled(true)
+        options.setOrientationLocked(false)
+
+        barCodeLauncher.launch(options)
+    }
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    )
+    {
+        isGranted ->
+        if(isGranted)
+        {
+            showCamera()
+        }
+    }
+
+    public fun checkCameraPermission(context: Context)
+    {
+        if(ContextCompat.checkSelfPermission(
+            context,
+            android.Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+            )
+        {
+            showCamera()
+        }
+        else if(shouldShowRequestPermissionRationale(android.Manifest.permission.CAMERA))
+        {
+            Toast.makeText(this@MainActivity, "Camera required", Toast.LENGTH_SHORT).show()
+        }
+        else
+        {
+            requestPermissionLauncher.launch(android.Manifest.permission.CAMERA)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContent {
             window.statusBarColor = getColor(R.color.app_color)
@@ -104,18 +90,18 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    FindRobApp()
+                    FindRobApp(function = { checkCameraPermission(context = applicationContext) })
                 }
             }
         }
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     FindRobertTheme {
-        FindRobApp()
+        FindRobApp(function = { checkCameraPermission(context = applicationContext) })
     }
-}
+}*/
 
