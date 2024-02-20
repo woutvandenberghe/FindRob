@@ -23,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,6 +32,7 @@ import androidx.navigation.compose.rememberNavController
 import be.vives.findrobert.data.MyConfiguration
 import be.vives.findrobert.ui.loginscreen.LoginScreen
 import be.vives.findrobert.ui.mainScreen.MainScreen
+import be.vives.findrobert.ui.mainScreen.MainScreenViewModel
 import be.vives.findrobert.ui.registerscreen.RegisterScreen
 import be.vives.findrobert.ui.scannerscreen.ScannerCompose
 
@@ -129,15 +131,18 @@ fun FindRobApp(navController: NavHostController = rememberNavController()) {
                 )
             }
             composable(route = FindRobertScreens.Main.name) {
+                val mainScreenViewModel: MainScreenViewModel = viewModel(factory = MainScreenViewModel.Factory)
+
                 MainScreen(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    mainScreenViewModel = mainScreenViewModel
                 )
             }
-            composable(route = FindRobertScreens.Scanner.name) {
-                ScannerCompose(
-                    function = //Insert function hier Wout
-                )
-            }
+//            composable(route = FindRobertScreens.Scanner.name) {
+//                ScannerCompose(
+//                    function = //Insert function hier Wout
+//                )
+//            }
         }
     }
 }

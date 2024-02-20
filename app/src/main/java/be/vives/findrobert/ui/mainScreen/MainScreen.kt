@@ -16,6 +16,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,9 +32,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun MainScreen(modifier: Modifier, mainScreenViewModel: MainScreenViewModel) {
-    val mainScreenViewModel: MainScreenViewModel = viewModel(
-        factory = MainScreenViewModel.Factory
-    )
+//    val mainScreenViewModel: MainScreenViewModel = viewModel(
+//        factory = MainScreenViewModel.Factory
+//    )
     Column(
         modifier = Modifier
             .padding(top = 70.dp, bottom = 80.dp),
@@ -59,7 +60,7 @@ fun MainScreen(modifier: Modifier, mainScreenViewModel: MainScreenViewModel) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(500.dp),
+                .height(100.dp),
             horizontalArrangement = Arrangement.Center,
         )
         {
@@ -99,6 +100,9 @@ fun FoundButton(modifier: Modifier) {
 
 @Composable
 fun LeaderBoard(modifier: Modifier, mainScreenViewModel: MainScreenViewModel) {
+    LaunchedEffect(Unit) {
+        mainScreenViewModel.getLeaders()
+    }
     val leaders by mainScreenViewModel.leaders
 
     Box(modifier = modifier.padding(top = 70.dp, bottom = 80.dp)) {
