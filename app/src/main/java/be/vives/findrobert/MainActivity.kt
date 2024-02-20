@@ -29,10 +29,10 @@ class MainActivity : ComponentActivity() {
     private val barCodeLauncher = registerForActivityResult(ScanContract())
     {
             result ->
-        if(result.contents == null)
-        {
+        if (result.contents == "abc") {
+            //Als code, navigeer naar pagina
+        } else if (result.contents == null) {
             Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
-
         }
     }
 
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    public fun checkCameraPermission(context: Context)
+     fun checkCameraPermission(context: Context)
     {
         if(ContextCompat.checkSelfPermission(
                 context,
