@@ -58,4 +58,5 @@
     <string name="social_screen_title">Social</string>
     <string name="search_friends">Search Friend</string>
     <string name="search_icon_description">Search icon description</string>
+    <string name="event">Event</string>
 </resources>
