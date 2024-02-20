@@ -56,8 +56,10 @@ fun MainScreen(modifier: Modifier, onFoundButtonClicked: () -> Unit) {
             horizontalArrangement = Arrangement.Center,
         )
         {
+            var hint = mainScreenViewModel.hint?.value ?: "Momenteel geen hint!"
+
             Text(
-                text = "Robert ligt dicht bij de grote boom.",
+                text = hint,
                 modifier = Modifier
                     .fillMaxWidth(),
                 fontSize = 18.sp,

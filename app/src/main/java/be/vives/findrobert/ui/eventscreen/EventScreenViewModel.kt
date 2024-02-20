@@ -30,16 +30,16 @@ class EventScreenViewModel : ViewModel() {
 //            }
 //        }
 //    }
-    companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]
-                        as FindRobApplication)
-                val usersRepository = application.container.usersRepository
-                MainScreenViewModel(
-                    usersRepository = usersRepository
-                )
-            }
-        }
-    }
+//    companion object {
+//        val Factory: ViewModelProvider.Factory = viewModelFactory {
+//            initializer {
+//                val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]
+//                        as FindRobApplication)
+//                val usersRepository = application.container.usersRepository
+//                MainScreenViewModel(
+//                    usersRepository = usersRepository
+//                )
+//            }
+//        }
+//    }
 }

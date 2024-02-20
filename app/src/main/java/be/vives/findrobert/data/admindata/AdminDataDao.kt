@@ -16,4 +16,7 @@ interface AdminDataDao {
 
     @Query("SELECT * FROM admindata")
     fun getAllAdminData(): Flow<List<AdminData>>
+
+    @Query("SELECT hint FROM admindata")
+    fun getHint(): String
 }

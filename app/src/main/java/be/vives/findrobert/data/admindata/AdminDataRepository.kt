@@ -8,4 +8,5 @@ interface AdminDataRepository {
     suspend fun upsertData(data: AdminData)
 
     suspend fun deleteData(data: AdminData)
+    suspend fun getHint(): String
 }
