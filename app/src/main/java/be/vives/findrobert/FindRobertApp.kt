@@ -216,6 +216,6 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
     }
 }
 fun resetMain(navController: NavHostController) {
+    navController.popBackStack(FindRobertScreens.Main.name, true)
     navController.navigate(FindRobertScreens.Main.name)
-    navController.popBackStack(FindRobertScreens.Main.name, false)
 }
