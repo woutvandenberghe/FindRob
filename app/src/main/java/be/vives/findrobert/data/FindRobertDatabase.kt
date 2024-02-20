@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [UserDbItem::class], version = 1)
+@Database(entities = [UserDbItem::class, FriendRelation::class], version = 1)
 abstract class FindRobertDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
+    abstract fun friendRelationDao(): FriendRelationDao
 
     companion object {
         @Volatile

@@ -4,6 +4,7 @@ import android.content.Context
 
 interface AppContainer {
     val usersRepository: UsersRepository
+    val friendRelationRepository: FriendRelationRepository
 }
 
 /**
@@ -15,5 +16,9 @@ class AppDataContainer(private val context: Context) : AppContainer {
      */
     override val usersRepository: UsersRepository by lazy {
         OfflineUsersRepository(FindRobertDatabase.getDatabase(context).userDao())
+    }
+
+    override val friendRelationRepository: FriendRelationRepository by lazy {
+        OfflineFriendRelationRepository(FindRobertDatabase.getDatabase(context).friendRelationDao())
     }
 }
