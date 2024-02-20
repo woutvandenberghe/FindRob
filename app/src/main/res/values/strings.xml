@@ -49,4 +49,8 @@
     <string name="empty" />
     <string name="all_fields_required">All textfields are required</string>
     <string name="back">Back</string>
+    <string name="currentHint">"Hint: "</string>
+    <string name="adminError">Je hebt onvoeldoende permissies.</string>
+    <string name="currentLocation">Locatie:</string>
+    <string name="lastFoundBy">Laatst gevonden door:</string>
 </resources>
