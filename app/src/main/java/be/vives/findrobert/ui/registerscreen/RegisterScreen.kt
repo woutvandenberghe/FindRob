@@ -35,7 +35,7 @@ fun RegisterScreen(modifier: Modifier = Modifier,
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
-            .padding(20.dp)
+            .padding(20.dp, 80.dp, 20.dp, 20.dp)
     ) {
         MyRegisterForm(
             userDetails = viewmodel.registerScreenUiState.userDetails,
@@ -55,7 +55,7 @@ fun RegisterScreen(modifier: Modifier = Modifier,
                     }
                 }
             },
-            color = Color(208,126,108,255)
+            color = Color(226,68,64,255)
         )
         if (viewmodel.invalidUsernameEnabled) {
             RegisterScreenDialog(
