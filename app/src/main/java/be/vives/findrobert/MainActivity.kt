@@ -1,5 +1,7 @@
 package be.vives.findrobert
 
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -14,46 +16,84 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.content.ContextCompat
+import be.vives.findrobert.ui.scannerscreen.ScannerCompose
 import be.vives.findrobert.ui.theme.FindRobertTheme
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 
 class MainActivity : ComponentActivity() {
 
+    class MainActivity : ComponentActivity() {
 
-    // Code voor scanner
-    private var textResult = mutableStateOf("")
-    private val barCodeLaucnher = registerForActivityResult(ScanContract())
-    {
-        result ->
-        if(result.contents == null)
+        // Code voor scanner
+        private var textResult = mutableStateOf("")
+        private val barCodeLaucnher = registerForActivityResult(ScanContract())
         {
-            Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
+                result ->
+            if(result.contents == null)
+            {
+                Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                textResult.value = result.contents
+            }
         }
-        else{
-            textResult.value = result.contents
-        }
-    }
-    private fun showCamera(){
-        val options = ScanOptions()
-        options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
-        options.setPrompt("Scan QR")
-        options.setCameraId(0)
-        options.setBeepEnabled(true)
-        options.setOrientationLocked(false)
-    }
+        private fun showCamera(){
+            val options = ScanOptions()
+            options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+            options.setPrompt("Scan QR")
+            options.setCameraId(0)
+            options.setBeepEnabled(true)
+            options.setOrientationLocked(false)
 
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    )
-    {
-        isGranted ->
-        if(isGranted)
+            barCodeLaucnher.launch(options)
+        }
+
+        private val requestPermissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        )
         {
-            showCamera()
+                isGranted ->
+            if(isGranted)
+            {
+                showCamera()
+            }
+        }
+        private fun checkCameraPermission(context: Context)
+        {
+            if(ContextCompat.checkSelfPermission(
+                    context,
+                    android.Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED)
+            {
+                showCamera()
+            }
+            else if(shouldShowRequestPermissionRationale(android.Manifest.permission.CAMERA))
+            {
+                Toast.makeText(this@MainActivity, "Camera required", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                requestPermissionLauncher.launch(android.Manifest.permission.CAMERA)
+            }
+        }
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContent {
+                window.statusBarColor = getColor(R.color.app_color)
+                FindRobertTheme {
+                    // A surface container using the 'background' color from the theme
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        ScannerCompose({ checkCameraPermission(applicationContext) })
+
+                    }
+                }
+            }
         }
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

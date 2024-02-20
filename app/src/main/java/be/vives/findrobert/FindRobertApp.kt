@@ -30,7 +30,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import be.vives.findrobert.data.MyConfiguration
 import be.vives.findrobert.ui.loginscreen.LoginScreen
+import be.vives.findrobert.ui.mainScreen.MainScreen
 import be.vives.findrobert.ui.registerscreen.RegisterScreen
+import be.vives.findrobert.ui.scannerscreen.ScannerCompose
 
 enum class FindRobertScreens(@StringRes val title: Int) {
     Login(title = R.string.login),
@@ -124,6 +126,16 @@ fun FindRobApp(navController: NavHostController = rememberNavController()) {
                         navController.popBackStack()
                         navController.navigate(FindRobertScreens.Main.name)
                     }
+                )
+            }
+            composable(route = FindRobertScreens.Main.name) {
+                MainScreen(
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+            composable(route = FindRobertScreens.Scanner.name) {
+                ScannerCompose(
+                    function = //Insert function hier Wout
                 )
             }
         }
