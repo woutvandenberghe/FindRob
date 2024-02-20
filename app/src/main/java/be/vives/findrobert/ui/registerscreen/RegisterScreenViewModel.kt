@@ -22,6 +22,7 @@ class RegisterScreenViewModel(private val usersRepository: UsersRepository): Vie
     var allFieldsAreRequiredEnabled by mutableStateOf(false)
         private set
 
+    var agreementChecked by mutableStateOf(false) // New property to track agreement
 
     fun updateUiState(userDetails: UserDetails) {
         registerScreenUiState =
@@ -85,8 +86,11 @@ class RegisterScreenViewModel(private val usersRepository: UsersRepository): Vie
 
     fun checkNoEmptyFields(uiState: UserDetails = registerScreenUiState.userDetails): Boolean {
         return with(uiState) {
-            firstName.isNotBlank() && lastName.isNotBlank() && username.isNotBlank() && password.isNotBlank()
+            firstName.isNotBlank() && lastName.isNotBlank() && username.isNotBlank() && password.isNotBlank() && checkAgreement()
         }
+    }
+    fun checkAgreement(uiState: UserDetails = registerScreenUiState.userDetails): Boolean {
+        return agreementChecked // Return the value of agreementChecked
     }
 }
 
