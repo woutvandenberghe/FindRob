@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -19,18 +20,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun MainScreen(modifier: Modifier) {
+fun MainScreen(modifier: Modifier, mainScreenViewModel: MainScreenViewModel) {
+    val mainScreenViewModel: MainScreenViewModel = viewModel(
+        factory = MainScreenViewModel.Factory
+    )
     Column(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .padding(top = 70.dp, bottom = 80.dp),
         verticalArrangement = Arrangement.Center
     ) {
@@ -75,6 +80,7 @@ fun MainScreen(modifier: Modifier) {
         {
             FoundButton(modifier = modifier)
         }
+        LeaderBoard(modifier = Modifier, mainScreenViewModel = mainScreenViewModel)
     }
 }
 
@@ -92,24 +98,31 @@ fun FoundButton(modifier: Modifier) {
 }
 
 @Composable
-fun LeaderBoard(modifier: Modifier) {
-    //val leaders by MainScreenViewModel.getLeaders
-    val id = 0
-    Box(modifier = modifier
-        .padding(top = 70.dp, bottom = 80.dp)) {
+fun LeaderBoard(modifier: Modifier, mainScreenViewModel: MainScreenViewModel) {
+    val leaders by mainScreenViewModel.leaders
+
+    Box(modifier = modifier.padding(top = 70.dp, bottom = 80.dp)) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "LeaderBoard",
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            LazyColumn {
+                itemsIndexed(leaders ?: emptyList()) { index, user ->
+                    Text(
+                        text = "${index + 1}: ${user.userName}"
+                    )
+                }
+            }
         }
-    Text(
-        text = "LeaderBoard",
-        modifier = Modifier
-            .fillMaxWidth(),
-        fontSize = 25.sp,
-        fontWeight = FontWeight.Bold,
-        textAlign = TextAlign.Center,
-    )
-        LazyColumn {
-            /*items(leaders ?: emptyList()) {
-                Text(text = id": Hello" )
-            }*/
-        }
+    }
 }
+
 

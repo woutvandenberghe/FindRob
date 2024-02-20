@@ -19,4 +19,7 @@ interface UserDao {
 
     @Query("SELECT * FROM userdbitem")
     fun getAllUsers(): Flow<List<UserDbItem>>
+
+    @Query("SELECT * FROM userdbitem LIMIT 10;")
+    fun getLeaders(): Flow<List<UserDbItem>>
 }

@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 interface UsersRepository {
 
     fun getAllUsersStream(): Flow<List<UserDbItem>>
+    fun getLeaders(): Flow<List<UserDbItem>>
 
     /**
      * Retrieve an item from the given data source that matches with the [id].
