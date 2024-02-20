@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun MainScreen(modifier: Modifier) {
     Column(
+
         modifier = Modifier
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
