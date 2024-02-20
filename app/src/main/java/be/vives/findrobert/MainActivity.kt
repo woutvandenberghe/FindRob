@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
         options.setPrompt("Scan a QR code")
         options.setCameraId(0)
         options.setBeepEnabled(true)
-        options.setOrientationLocked(false)
+        options.setOrientationLocked(true)
 
         barCodeLauncher.launch(options)
     }
