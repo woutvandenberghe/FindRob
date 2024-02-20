@@ -2,10 +2,17 @@ package be.vives.findrobert
 
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -117,6 +125,24 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
                     navController.navigate(FindRobertScreens.Admin.name)
                 }
             )
+        },
+        bottomBar = {
+            if (currentScreen == FindRobertScreens.Main) {
+                BottomAppBar(modifier = Modifier.height(65.dp), containerColor = Color(226,68,64,255)) {
+                    Row (modifier = Modifier.fillMaxWidth().height(45.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
+                        IconButton(onClick = { /*TODO*/ }, ) {
+                            Icon(imageVector = Icons.Default.Favorite,
+                                contentDescription = stringResource(id = R.string.friends_button)
+                            )
+                        }
+                        IconButton(onClick = { /*TODO*/ }, ) {
+                            Icon(imageVector = Icons.Default.DateRange,
+                                contentDescription = stringResource(id = R.string.events_button)
+                            )
+                        }
+                    }
+                }
+            }
         }
     ) {
         NavHost(

@@ -53,4 +53,6 @@
     <string name="adminError">Je hebt onvoeldoende permissies.</string>
     <string name="currentLocation">Locatie:</string>
     <string name="lastFoundBy">Laatst gevonden door:</string>
+    <string name="friends_button">Friends icon button</string>
+    <string name="events_button">Events button icon</string>
 </resources>

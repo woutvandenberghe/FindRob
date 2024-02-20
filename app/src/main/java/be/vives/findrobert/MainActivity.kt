@@ -83,7 +83,7 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
         setContent {
-            window.statusBarColor = getColor(R.color.app_color)
+            window.setStatusBarColor(getColor(R.color.app_color))
             FindRobertTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
