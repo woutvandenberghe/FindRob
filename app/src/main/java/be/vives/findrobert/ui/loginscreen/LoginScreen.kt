@@ -1,4 +1,4 @@
-package be.arnewittouck.mymuseumapp.ui.loginscreen
+package be.vives.findrobert.ui.loginscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -25,13 +25,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import be.vives.findrobert.R
+import be.vives.findrobert.ui.AppViewModelProvider
 import be.vives.findrobert.ui.components.LoginScreenButton
 import be.vives.findrobert.ui.components.MyTextField
 import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier,
-                viewmodel: LoginScreenViewModel = viewModel(/** factory = AppViewModelProvider.Factory **/),
+                viewmodel: LoginScreenViewModel = viewModel(factory = AppViewModelProvider.Factory),
                 onLoginValid: () -> Unit,
                 onRegisterButtonClicked: () -> Unit) {
 

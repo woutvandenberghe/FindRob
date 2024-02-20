@@ -28,9 +28,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import be.arnewittouck.mymuseumapp.ui.loginscreen.LoginScreen
-import be.arnewittouck.mymuseumapp.ui.registerscreen.RegisterScreen
 import be.vives.findrobert.data.MyConfiguration
+import be.vives.findrobert.ui.loginscreen.LoginScreen
+import be.vives.findrobert.ui.registerscreen.RegisterScreen
 
 enum class FindRobertScreens(@StringRes val title: Int) {
     Login(title = R.string.login),

@@ -5,14 +5,14 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import be.arnewittouck.mymuseumapp.ui.loginscreen.LoginScreenViewModel
-import be.arnewittouck.mymuseumapp.ui.registerscreen.RegisterScreenViewModel
 import be.vives.findrobert.FindRobApplication
+import be.vives.findrobert.ui.loginscreen.LoginScreenViewModel
+import be.vives.findrobert.ui.registerscreen.RegisterScreenViewModel
 
 /**
  * Provides Factory to create instance of ViewModel for the entire Inventory app
  */
-/** object AppViewModelProvider {
+object AppViewModelProvider {
     val Factory = viewModelFactory {
 
         initializer {
@@ -22,7 +22,7 @@ import be.vives.findrobert.FindRobApplication
             LoginScreenViewModel(findRobApplication().container.usersRepository)
         }
     }
-} **/
+}
 
 /**
  * Extension function to queries for [Application] object and returns an instance of
