@@ -1,4 +1,4 @@
-package be.vives.findrobert.data
+package be.vives.findrobert.data.friendrelation
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

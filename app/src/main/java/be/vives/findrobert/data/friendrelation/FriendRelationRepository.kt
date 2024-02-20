@@ -1,5 +1,6 @@
-package be.vives.findrobert.data
+package be.vives.findrobert.data.friendrelation
 
+import be.vives.findrobert.data.friendrelation.FriendRelation
 import kotlinx.coroutines.flow.Flow
 
 interface FriendRelationRepository {

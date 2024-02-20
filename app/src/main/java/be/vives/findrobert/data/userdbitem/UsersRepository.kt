@@ -1,5 +1,6 @@
-package be.vives.findrobert.data
+package be.vives.findrobert.data.userdbitem
 
+import be.vives.findrobert.data.userdbitem.UserDbItem
 import kotlinx.coroutines.flow.Flow
 
 interface UsersRepository {

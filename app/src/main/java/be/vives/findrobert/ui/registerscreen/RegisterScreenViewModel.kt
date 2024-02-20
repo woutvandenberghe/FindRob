@@ -5,10 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import be.vives.findrobert.data.MyConfiguration
-import be.vives.findrobert.data.UserDbItem
+import be.vives.findrobert.data.userdbitem.UserDbItem
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
-import be.vives.findrobert.data.UsersRepository
+import be.vives.findrobert.data.userdbitem.UsersRepository
 import vives.findrobert.ui.registerscreen.RegisterScreenUiState
 
 class RegisterScreenViewModel(private val usersRepository: UsersRepository): ViewModel() {

@@ -9,8 +9,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import be.vives.findrobert.FindRobApplication
-import be.vives.findrobert.data.UserDbItem
-import be.vives.findrobert.data.UsersRepository
+import be.vives.findrobert.data.userdbitem.UserDbItem
+import be.vives.findrobert.data.userdbitem.UsersRepository
 import kotlinx.coroutines.launch
 
 class MainScreenViewModel(private val usersRepository: UsersRepository) : ViewModel() {
