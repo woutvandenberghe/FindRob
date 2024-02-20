@@ -55,4 +55,7 @@
     <string name="lastFoundBy">Laatst gevonden door:</string>
     <string name="friends_button">Friends icon button</string>
     <string name="events_button">Events button icon</string>
+    <string name="social_screen_title">Social</string>
+    <string name="search_friends">Search Friend</string>
+    <string name="search_icon_description">Search icon description</string>
 </resources>

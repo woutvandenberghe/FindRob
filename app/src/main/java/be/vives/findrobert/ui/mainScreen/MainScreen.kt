@@ -42,26 +42,9 @@ fun MainScreen(modifier: Modifier, onFoundButtonClicked: () -> Unit) {
     )
     Column(
         modifier = Modifier
-            .padding(top = 70.dp, bottom = 80.dp),
+            .padding(top = 120.dp, bottom = 80.dp),
         verticalArrangement = Arrangement.Center
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(100.dp),
-            horizontalArrangement = Arrangement.Center,
-        )
-        {
-            Text(
-                text = "Main",
-                modifier = Modifier
-                    .fillMaxWidth(),
-                fontSize = 25.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-            )
-
-        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()

@@ -39,13 +39,15 @@ import be.vives.findrobert.ui.loginscreen.LoginScreen
 import be.vives.findrobert.ui.mainScreen.MainScreen
 import be.vives.findrobert.ui.registerscreen.RegisterScreen
 import be.vives.findrobert.ui.scannerscreen.ScannerCompose
+import be.vives.findrobert.ui.socialscreen.SocialScreen
 
 enum class FindRobertScreens(@StringRes val title: Int) {
     Login(title = R.string.login),
     Register(title = R.string.registreer),
     Main(title = R.string.main),
     Scanner(title = R.string.scanner),
-    Admin(title = R.string.admin)
+    Admin(title = R.string.admin),
+    Social(title = R.string.social_screen_title)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -130,7 +132,7 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
             if (currentScreen == FindRobertScreens.Main) {
                 BottomAppBar(modifier = Modifier.height(65.dp), containerColor = Color(226,68,64,255)) {
                     Row (modifier = Modifier.fillMaxWidth().height(45.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
-                        IconButton(onClick = { /*TODO*/ }, ) {
+                        IconButton(onClick = { navController.navigate(FindRobertScreens.Social.name) }, ) {
                             Icon(imageVector = Icons.Default.Favorite,
                                 contentDescription = stringResource(id = R.string.friends_button)
                             )
@@ -190,6 +192,9 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
             composable(route = FindRobertScreens.Admin.name){
                 showAdmin = false;
                 AdminScreen()
+            }
+            composable(route = FindRobertScreens.Social.name){
+                SocialScreen()
             }
         }
     }
