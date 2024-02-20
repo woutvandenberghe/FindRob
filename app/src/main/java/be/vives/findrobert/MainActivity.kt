@@ -6,33 +6,33 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
-import be.vives.findrobert.ui.scannerscreen.ScannerCompose
 import be.vives.findrobert.ui.theme.FindRobertTheme
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 
 class MainActivity : ComponentActivity() {
 
-    private var textResult = mutableStateOf("")
+    private var textResult =  mutableStateOf("")
 
     private val barCodeLauncher = registerForActivityResult(ScanContract())
     {
             result ->
-        if (result.contents == "abc") {
-            //Als code, navigeer naar pagina
-        } else if (result.contents == null) {
-            Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
+        try {
+            if (result.contents != null) {
+                textResult.value = result.contents
+            }
+        }
+        catch (e: Exception)
+        {
+            e.printStackTrace()
+            print(e.message)
         }
     }
 
@@ -90,12 +90,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    FindRobApp(function = { checkCameraPermission(context = applicationContext) })
+                    FindRobApp(function = { checkCameraPermission(context = applicationContext) }, textResult = textResult)
                 }
             }
-        }
+        }}
+
     }
-}
+
+
+
 
 /*@Preview(showBackground = true)
 @Composable

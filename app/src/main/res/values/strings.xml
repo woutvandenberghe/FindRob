@@ -60,4 +60,6 @@
     <string name="search_icon_description">Search icon description</string>
     <string name="event">Event</string>
     <string name="newHint">Nieuw hint</string>
+    <string name="found" />
+    <string name="wrongqr" />
 </resources>

@@ -14,19 +14,22 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import be.vives.findrobert.FindRobertScreens
 import be.vives.findrobert.R
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ScannerCompose(function: () -> Unit) {
-    Scaffold(
+fun ScannerCompose(function: () -> Unit, navController: NavController, textResult: MutableState<String>) {    Scaffold(
         bottomBar = {
             BottomAppBar(
                 actions = {},
@@ -39,6 +42,16 @@ fun ScannerCompose(function: () -> Unit) {
             )
         }
     ) { _ ->
+        DisposableEffect(textResult.value) {
+            if (textResult.value == "abc") {
+                navController.navigate(FindRobertScreens.Found.name)
+            }
+
+            onDispose {
+                // Cleanup code, if needed
+            }
+        }
+
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,

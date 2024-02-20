@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,7 +50,9 @@ enum class FindRobertScreens(@StringRes val title: Int) {
     Scanner(title = R.string.scanner),
     Admin(title = R.string.admin),
     Social(title = R.string.social_screen_title),
-    Event(title = R.string.event)
+    Event(title = R.string.event),
+    Found(title = R.string.found),
+    WrongQR(title = R.string.wrongqr)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -107,7 +110,7 @@ fun FindRobertAppBar(
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FindRobApp(navController: NavHostController = rememberNavController(), function: () -> Unit) {
+fun FindRobApp(navController: NavHostController = rememberNavController(), function: () -> Unit, textResult: MutableState<String>) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = FindRobertScreens.valueOf(
@@ -190,7 +193,9 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
             composable(route = FindRobertScreens.Scanner.name) {
                 showAdmin = false;
                 ScannerCompose(
-                    function = function
+                    function = function,
+                    navController,
+                    textResult = textResult
                 )
             }
             composable(route = FindRobertScreens.Admin.name){
@@ -202,6 +207,9 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
             }
             composable(route = FindRobertScreens.Event.name){
                 EventScreen()
+            }
+            composable(route = FindRobertScreens.Found.name){
+                FindRobertScreens.Found
             }
         }
     }
