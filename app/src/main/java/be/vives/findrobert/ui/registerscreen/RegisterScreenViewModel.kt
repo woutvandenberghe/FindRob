@@ -95,7 +95,8 @@ data class UserDetails(
     val firstName: String = "",
     val lastName: String = "",
     val username: String = "",
-    val password: String = ""
+    val password: String = "",
+    val bestTime: Int = 0
 )
 
 
@@ -104,5 +105,6 @@ fun UserDetails.toItem(): UserDbItem = UserDbItem(
     firstName = firstName,
     lastName = lastName,
     userName = username,
-    password = password
+    password = password,
+    bestTime = bestTime
 )
