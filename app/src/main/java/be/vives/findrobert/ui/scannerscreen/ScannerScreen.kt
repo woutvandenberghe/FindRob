@@ -18,6 +18,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import be.vives.findrobert.R
+import com.journeyapps.barcodescanner.ScanOptions
+
+
+private fun showCamera(){
+    val options = ScanOptions()
+    options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+    options.setPrompt("Scan QR")
+    options.setCameraId(0)
+    options.setBeepEnabled(true)
+    options.setOrientationLocked(false)
+}
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
