@@ -130,7 +130,8 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
             }
             composable(route = FindRobertScreens.Main.name) {
                 MainScreen(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    onFoundButtonClicked = { navController.navigate(FindRobertScreens.Scanner.name) }
                 )
             }
             composable(route = FindRobertScreens.Scanner.name) {
