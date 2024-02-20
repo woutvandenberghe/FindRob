@@ -19,6 +19,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -63,36 +64,35 @@ fun EventScreen() {
                 textAlign = TextAlign.Center,
             )
         }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .background(Color.Green, MaterialTheme.shapes.medium)
+                .height(300.dp)
+
+        ) {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .height(500.dp)
+                .padding(15.dp),
+                horizontalArrangement = Arrangement.Center,) {
+                Text(
+                    text = "Happy Hour in Barsol",
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                )
+            }
+            Row(
+                modifier = Modifier
+                .padding(50.dp)
+            ) {
+                Text(text = "Lorem ipsum dolor sit amet. Est repellendus temporibus et officiis rerum est voluptates recusandae ex quasi officiis qui numquam corrupti sit incidunt quam! Sit voluptatem adipisci quo internos modi est eaque consectetur est ducimus officiis aut quia quis. ")
+            }
+        }
+
     }
 }
-
-//@Composable
-//fun ShowFavourites(modifier: Modifier, ) {
-//    Box(modifier = modifier
-//        .padding(top = 70.dp, bottom = 80.dp)) {
-//        LazyColumn {
-//            items(events ?: emptyList()) { event ->
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(horizontal = 16.dp, vertical = 8.dp)
-//                        .background(Color.LightGray) // Light background color
-//                ) {
-//                    Column(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(8.dp)
-//                    ) {
-//                        // Title
-//                        Text(
-//                            text = event.name,
-//                            fontSize = 17.sp,
-//                            textAlign = TextAlign.Left,
-//                            fontWeight = FontWeight.Bold,
-//                        )
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//}
