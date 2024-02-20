@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,7 +55,7 @@ fun MainScreen(modifier: Modifier, onFoundButtonClicked: () -> Unit) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(500.dp),
+                .height(100.dp),
             horizontalArrangement = Arrangement.Center,
         )
         {
@@ -94,6 +95,9 @@ fun FoundButton(modifier: Modifier, onClick: () -> Unit) {
 
 @Composable
 fun LeaderBoard(modifier: Modifier, mainScreenViewModel: MainScreenViewModel) {
+    LaunchedEffect(Unit) {
+        mainScreenViewModel.getLeaders()
+    }
     val leaders by mainScreenViewModel.leaders
 
     Box(modifier = modifier.padding(top = 70.dp, bottom = 80.dp)) {

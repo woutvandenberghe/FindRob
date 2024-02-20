@@ -79,7 +79,6 @@ fun LoginScreen(modifier: Modifier = Modifier,
                     if (viewmodel.loginFunction()) {
                         onLoginValid()
                     }
-                    onLoginValid()
                 }
             }, buttonText = stringResource(id = R.string.login)
             )
