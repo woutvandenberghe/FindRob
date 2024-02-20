@@ -11,11 +11,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import be.vives.findrobert.FindRobApplication
+import be.vives.findrobert.data.MyConfiguration
 import be.vives.findrobert.data.admindata.AdminDataRepository
 import be.vives.findrobert.data.userdbitem.UserDbItem
 import be.vives.findrobert.data.userdbitem.UsersRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class MainScreenViewModel(private val usersRepository: UsersRepository, private val adminDataRepository: AdminDataRepository) : ViewModel() {
@@ -38,18 +40,13 @@ class MainScreenViewModel(private val usersRepository: UsersRepository, private 
 
 //    private val _hint: MutableLiveData<String?> = MutableLiveData()
 //    val hint: LiveData<String?> get() = _hint
-private val _hint: MutableState<String?> = mutableStateOf(null)
-    val hint: State<String?> get() = _hint
-
-    suspend fun getHint() {
-        try {
-            val hintResult = adminDataRepository.getHint()
-            _hint.value = hintResult
-        } catch (e: Exception) {
-            // Handle exceptions if needed
-            // You might want to log the error or handle it in a specific way
+init {
+    viewModelScope.launch {
+        if (adminDataRepository.getAllAdminData().first().isNotEmpty()) {
+            MyConfiguration.hint = adminDataRepository.getAllAdminData().first().first().hint
         }
     }
+}
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {

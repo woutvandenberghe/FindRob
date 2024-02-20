@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import be.vives.findrobert.R
+import be.vives.findrobert.data.MyConfiguration
 
 @Composable
 fun MainScreen(modifier: Modifier, onFoundButtonClicked: () -> Unit) {
@@ -56,7 +57,7 @@ fun MainScreen(modifier: Modifier, onFoundButtonClicked: () -> Unit) {
             horizontalArrangement = Arrangement.Center,
         )
         {
-            var hint = mainScreenViewModel.hint?.value ?: "Momenteel geen hint!"
+            var hint = MyConfiguration.hint
 
             Text(
                 text = hint,
