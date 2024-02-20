@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import be.vives.findrobert.FindRobApplication
+import be.vives.findrobert.ui.adminscreen.AdminScreenViewModel
 import be.vives.findrobert.ui.loginscreen.LoginScreenViewModel
 import be.vives.findrobert.ui.registerscreen.RegisterScreenViewModel
 
@@ -20,6 +21,9 @@ object AppViewModelProvider {
         }
         initializer {
             LoginScreenViewModel(findRobApplication().container.usersRepository)
+        }
+        initializer {
+            AdminScreenViewModel(findRobApplication().container.adminDataRepository)
         }
     }
 }

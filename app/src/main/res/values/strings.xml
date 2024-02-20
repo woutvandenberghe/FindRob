@@ -59,4 +59,5 @@
     <string name="search_friends">Search Friend</string>
     <string name="search_icon_description">Search icon description</string>
     <string name="event">Event</string>
+    <string name="newHint">Nieuw hint</string>
 </resources>
