@@ -1,5 +1,7 @@
 package be.vives.findrobert.ui.mainScreen
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +22,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -93,19 +97,22 @@ fun LeaderBoard(modifier: Modifier, mainScreenViewModel: MainScreenViewModel) {
     }
     val leaders by mainScreenViewModel.leaders
 
-    Box(modifier = modifier.padding(top = 70.dp, bottom = 80.dp)) {
+    Column (modifier = Modifier.fillMaxWidth().padding(20.dp, 70.dp, 20.dp, 80.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
+                .height(500.dp)
+                .background(color = Color.LightGray),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "LeaderBoard",
+                text = "Leaderboard",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-
             LazyColumn {
                 itemsIndexed(leaders ?: emptyList()) { index, user ->
                     Text(

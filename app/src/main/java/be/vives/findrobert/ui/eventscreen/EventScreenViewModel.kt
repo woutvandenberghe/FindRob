@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import be.vives.findrobert.FindRobApplication
-import be.vives.findrobert.data.UserDbItem
 import be.vives.findrobert.ui.mainScreen.MainScreenViewModel
 import kotlinx.coroutines.launch
 
