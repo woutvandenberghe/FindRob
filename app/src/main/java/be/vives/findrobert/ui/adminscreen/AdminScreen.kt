@@ -24,6 +24,7 @@ import be.vives.findrobert.ui.components.MyTextField
 fun AdminScreen(modifier: Modifier = Modifier,
                 viewmodel: AdminScreenViewModel = viewModel(
                     factory = AppViewModelProvider.Factory),
+                onChangeClicked: () -> Unit
                 ) {
         Column(
             modifier = Modifier
@@ -56,12 +57,16 @@ fun AdminScreen(modifier: Modifier = Modifier,
                 Text("Nieuwe hint:")
                 MyTextField(
                     value = viewmodel.nieuweHint,
-                    onValueChange = { viewmodel.updateHint(it) },
+                    onValueChange = {
+                        viewmodel.updateHint(it)
+                        },
                     label = stringResource(id = R.string.newHint),
                     modifier = modifier,
                     isError = false
                 )
-                Button(onClick = { viewmodel.updateHintInDb() }) {
+                Button(onClick = { onChangeClicked()
+                    viewmodel.updateHintInDb()
+                }) {
                     Text("Verander de hint")
                 }
             }

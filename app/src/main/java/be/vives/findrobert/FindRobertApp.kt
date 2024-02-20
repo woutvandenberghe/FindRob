@@ -195,7 +195,7 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
             }
             composable(route = FindRobertScreens.Admin.name){
                 showAdmin = false;
-                AdminScreen()
+                AdminScreen(onChangeClicked = { resetMain(navController) })
             }
             composable(route = FindRobertScreens.Social.name){
                 SocialScreen()
@@ -205,4 +205,8 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
             }
         }
     }
+}
+fun resetMain(navController: NavHostController) {
+    navController.navigate(FindRobertScreens.Main.name)
+    navController.popBackStack(FindRobertScreens.Main.name, false)
 }
