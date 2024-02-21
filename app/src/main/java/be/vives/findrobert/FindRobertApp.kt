@@ -188,7 +188,13 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
                 )
             }
             composable(route = FindRobertScreens.Main.name) {
-                showAdmin = true;
+                showAdmin = if(MyConfiguration.loggedInUser != null) {
+                    MyConfiguration.loggedInUser!!.userName == "admin" &&
+                        MyConfiguration.loggedInUser!!.password == "admin"
+                } else{
+                    false;
+                }
+
                 MainScreen(
                     modifier = Modifier.fillMaxSize(),
                     onFoundButtonClicked = { navController.navigate(FindRobertScreens.Scanner.name) }
