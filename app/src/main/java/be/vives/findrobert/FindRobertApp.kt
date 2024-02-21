@@ -210,11 +210,7 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
                 EventScreen()
             }
             composable(route = FindRobertScreens.Found.name){
-                FoundScreen(navigateToMainScreen = {
-                    navController.popBackStack()
-                    navController.popBackStack()
-                    navController.navigate(FindRobertScreens.Main.name)
-                })
+                FindRobertScreens.Found
             }
         }
     }

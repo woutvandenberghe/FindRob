@@ -93,12 +93,10 @@ class MainActivity : ComponentActivity() {
                     FindRobApp(function = { checkCameraPermission(context = applicationContext) }, textResult = textResult)
                 }
             }
-        }}
-
+        }
     }
 
-
-
+    }
 
 /*@Preview(showBackground = true)
 @Composable
