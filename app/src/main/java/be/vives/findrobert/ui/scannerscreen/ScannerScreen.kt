@@ -19,6 +19,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,7 +49,6 @@ fun ScannerCompose(function: () -> Unit, navController: NavController, textResul
             }
 
             onDispose {
-                // Cleanup code, if needed
             }
         }
 
@@ -66,3 +66,34 @@ fun ScannerCompose(function: () -> Unit, navController: NavController, textResul
         }
     }
 }
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Composable
+fun ScannerCompose2(function: () -> Unit, navController: NavController, textResult: MutableState<String>) {
+    Scaffold()
+     { _ ->
+        DisposableEffect(textResult.value) {
+            if (textResult.value == "abc") {
+                navController.navigate(FindRobertScreens.Found.name)
+            }
+
+            onDispose {
+            }
+        }
+
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            FloatingActionButton(
+                onClick = { function() },
+                modifier = Modifier.size(150.dp) // Set your desired size here
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.qr_scan),
+                    contentDescription = "QR Scan",
+                    modifier = Modifier.scale(2.5f)
+                )
+            }
+        }
+    }}

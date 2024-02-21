@@ -43,6 +43,7 @@ import be.vives.findrobert.ui.loginscreen.LoginScreen
 import be.vives.findrobert.ui.mainScreen.MainScreen
 import be.vives.findrobert.ui.registerscreen.RegisterScreen
 import be.vives.findrobert.ui.scannerscreen.ScannerCompose
+import be.vives.findrobert.ui.scannerscreen.ScannerCompose2
 import be.vives.findrobert.ui.socialscreen.SocialScreen
 
 enum class FindRobertScreens(@StringRes val title: Int) {
@@ -200,7 +201,7 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
 
             composable(route = FindRobertScreens.Scanner.name) {
                 showAdmin = false;
-                ScannerCompose(
+                ScannerCompose2(
                     function = function,
                     navController,
                     textResult = textResult
