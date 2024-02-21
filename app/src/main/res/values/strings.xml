@@ -60,6 +60,10 @@
     <string name="search_icon_description">Search icon description</string>
     <string name="event">Event</string>
     <string name="newHint">Nieuw hint</string>
-    <string name="found" />
+    <string name="found">Proficiat!</string>
     <string name="wrongqr" />
+    <string name="hint">Hint</string>
+    <string name="location">Location</string>
+    <string name="found_uitleg">Goed zo! Je hebt Robert de kabouter gevonden! Nu mag je hem zelf verstoppen op de campus van Vives.</string>
+    <string name="submit">Submit</string>
 </resources>

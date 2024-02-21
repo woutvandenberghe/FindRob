@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class AdminData(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     val id: Int = 0,
     val hint: String,
     val location: String

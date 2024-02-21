@@ -1,5 +1,6 @@
 package be.vives.findrobert
 
+import FoundScreen
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -209,7 +210,11 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
                 EventScreen()
             }
             composable(route = FindRobertScreens.Found.name){
-                FindRobertScreens.Found
+                FoundScreen(navigateToMainScreen = {
+                    navController.popBackStack()
+                    navController.popBackStack()
+                    navController.navigate(FindRobertScreens.Main.name)
+                })
             }
         }
     }
