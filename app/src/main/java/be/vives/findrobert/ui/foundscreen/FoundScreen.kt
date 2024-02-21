@@ -20,8 +20,8 @@ import be.vives.findrobert.ui.AppViewModelProvider
 import be.vives.findrobert.ui.components.MyTextField
 import be.vives.findrobert.ui.foundscreen.DataDetails
 import be.vives.findrobert.ui.foundscreen.FoundScreenViewModel
-import be.vives.findrobert.ui.registerscreen.MyCreateButton
 import kotlinx.coroutines.launch
+import kotlin.reflect.KFunction1
 
 @Composable
 fun FoundScreen(viewmodel: FoundScreenViewModel = viewModel(factory = AppViewModelProvider.Factory),
@@ -37,17 +37,11 @@ fun FoundScreen(viewmodel: FoundScreenViewModel = viewModel(factory = AppViewMod
     ) {
         Text(text = stringResource(id = R.string.found_uitleg),
             modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 15.dp))
-        MyTextField(value = viewmodel.hint,
-            onValueChange = { viewmodel.updateHint(it) },
-            label = stringResource(id = R.string.hint),
-            isError = false,
-            modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 10.dp)
-        )
-        MyTextField(value = viewmodel.location,
-            onValueChange = { viewmodel.updateLocation(it) },
-            label = stringResource(id = R.string.location),
-            isError = false
-        )
+
+        MySubmitForm(
+            dataDetails = viewmodel.foundScreenUiState.dataDetails,
+            onValueChange = viewmodel::updateUiState)
+
         MyFoundButton(
             modifier = Modifier,
             onSaveClicked = {
@@ -62,6 +56,28 @@ fun FoundScreen(viewmodel: FoundScreenViewModel = viewModel(factory = AppViewMod
             color = Color(226,68,64,255)
         )
     }
+}
+
+@Composable
+fun MySubmitForm(
+    dataDetails: DataDetails,
+    onValueChange: KFunction1<DataDetails, Unit>
+) {
+    MyTextField(value = dataDetails.hint,
+        onValueChange = {
+            onValueChange(dataDetails.copy(hint = it))
+        },
+        label = stringResource(id = R.string.hint),
+        isError = false,
+        modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 10.dp)
+    )
+    MyTextField(value = dataDetails.location,
+        onValueChange = {
+            onValueChange(dataDetails.copy(location = it))
+        },
+        label = stringResource(id = R.string.location),
+        isError = false
+    )
 }
 
 

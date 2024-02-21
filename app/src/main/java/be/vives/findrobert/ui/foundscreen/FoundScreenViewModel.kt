@@ -20,13 +20,6 @@ class FoundScreenViewModel (private val adminDataRepository: AdminDataRepository
             FoundScreenUiState(dataDetails = dataDetails)
     }
 
-    fun updateHint(newHint: String) {
-        hint = newHint
-    }
-    fun updateLocation(newLocation: String) {
-        location = newLocation
-    }
-
     suspend fun saveData() {
         adminDataRepository.upsertData(foundScreenUiState.dataDetails.toItem())
     }
