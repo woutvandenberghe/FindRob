@@ -44,7 +44,7 @@ fun AdminScreen(modifier: Modifier = Modifier,
                 Spacer(Modifier.height(20.dp))
                 Text(stringResource(id = R.string.currentLocation))
                 //Mock locatie
-                Text("Robert ligt bij de eerste bom links van de Radio 2 gebouw aan de kant van de straat.")
+                Text(viewmodel.location)
                 //hier locatie uit database halen
                 Spacer(Modifier.height(20.dp))
                 Text(stringResource(id = R.string.lastFoundBy))

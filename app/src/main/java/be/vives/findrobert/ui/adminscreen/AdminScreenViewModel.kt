@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 
 class AdminScreenViewModel(private val adminRepository: AdminDataRepository) : ViewModel() {
     var nieuweHint by mutableStateOf("")
+    var location by mutableStateOf("Robert ligt bij de eerste bom links van de Radio 2 gebouw aan de kant van de straat.")
 
     fun isAdmin(): Boolean {
         return if(MyConfiguration.loggedInUser != null){
@@ -28,6 +29,9 @@ class AdminScreenViewModel(private val adminRepository: AdminDataRepository) : V
             if (adminRepository.getAllAdminData().first().isNotEmpty()) {
                 MyConfiguration.hint = adminRepository.getAllAdminData().first().first().hint
             }
+            if(adminRepository.getAllAdminData().first().isNotEmpty()){
+                location = adminRepository.getAllAdminData().first().first().location
+            }
         }
     }
 
@@ -40,7 +44,7 @@ class AdminScreenViewModel(private val adminRepository: AdminDataRepository) : V
                 var adminData = AdminData(
                     0,
                     nieuweHint,
-                    location = "Robert ligt bij de eerste bom links van de Radio 2 gebouw aan de kant van de straat."
+                    location = location
                 )
                 if (adminRepository.getAllAdminData().first().isNotEmpty()) {
                     for(admindata in adminRepository.getAllAdminData().first()){
