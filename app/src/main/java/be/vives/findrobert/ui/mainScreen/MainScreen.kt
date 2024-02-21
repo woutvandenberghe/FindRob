@@ -22,6 +22,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -54,13 +55,12 @@ fun MainScreen(modifier: Modifier, onFoundButtonClicked: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp),
-            horizontalArrangement = Arrangement.Center,
+            horizontalArrangement = Arrangement.SpaceAround,
         )
         {
             var hint = MyConfiguration.hint
-
             Text(
-                text = hint,
+                text = "Hint: " + hint,
                 modifier = Modifier
                     .fillMaxWidth(),
                 fontSize = 18.sp,

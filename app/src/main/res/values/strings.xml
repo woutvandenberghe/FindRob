@@ -2,7 +2,7 @@
     <string name="app_name">FindRobert</string>
     <string name="login">Login</string>
     <string name="registreer">registreer</string>
-    <string name="main">main</string>
+    <string name="main">Welcome </string>
     <string name="scanner">scanner</string>
     <string name="admin">admin</string>
     <string name="back_button">"Back"</string>

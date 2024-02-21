@@ -36,6 +36,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import be.vives.findrobert.data.MyConfiguration
 import be.vives.findrobert.ui.adminscreen.AdminScreen
 import be.vives.findrobert.ui.eventscreen.EventScreen
 import be.vives.findrobert.ui.loginscreen.LoginScreen
@@ -71,9 +72,10 @@ fun FindRobertAppBar(
         {
             if (currentScreen == FindRobertScreens.Main) {
                 Text(stringResource(currentScreen.title)
-                    /**+ ( MyConfiguration.loggedInUser?.firstName ?: stringResource(id = R.string.empty))
                         + stringResource(id = R.string.space)
-                        + (MyConfiguration.loggedInUser?.lastName ?: stringResource(id = R.string.empty))**/
+                        + ( MyConfiguration.loggedInUser?.firstName ?: stringResource(id = R.string.empty))
+                        + stringResource(id = R.string.space)
+                        + (MyConfiguration.loggedInUser?.lastName ?: stringResource(id = R.string.empty))
                     , color = Color.White
                 )
             } else {
