@@ -74,9 +74,16 @@ fun ScannerCompose2(function: () -> Unit, navController: NavController, textResu
         DisposableEffect(textResult.value) {
             if (textResult.value == "abc") {
                 navController.navigate(FindRobertScreens.Found.name)
+                textResult.value = ""
+            }
+            else if(!textResult.value.equals("abc") && !textResult.value.equals(""))
+            {
+                navController.navigate(FindRobertScreens.WrongQR.name)
+                textResult.value = ""
             }
 
             onDispose {
+
             }
         }
 

@@ -1,6 +1,7 @@
 package be.vives.findrobert
 
 import Found
+import WrongQR
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -219,6 +220,9 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
             }
             composable(route = FindRobertScreens.Found.name) {
                 Found()
+            }
+            composable(route = FindRobertScreens.WrongQR.name) {
+                WrongQR()
             }
         }
     }
