@@ -30,7 +30,7 @@ import be.vives.findrobert.R
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ScannerCompose(function: () -> Unit, navController: NavController, textResult: MutableState<String>) {    Scaffold(
+fun ScannerComposeoutdated(function: () -> Unit, navController: NavController, textResult: MutableState<String>) {    Scaffold(
         bottomBar = {
             BottomAppBar(
                 actions = {},
@@ -68,7 +68,7 @@ fun ScannerCompose(function: () -> Unit, navController: NavController, textResul
 }
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ScannerCompose2(function: () -> Unit, navController: NavController, textResult: MutableState<String>) {
+fun ScannerCompose(function: () -> Unit, navController: NavController, textResult: MutableState<String>) {
     Scaffold()
      { _ ->
         DisposableEffect(textResult.value) {
