@@ -36,6 +36,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import be.vives.findrobert.data.MyConfiguration
 import be.vives.findrobert.ui.adminscreen.AdminScreen
 import be.vives.findrobert.ui.eventscreen.EventScreen
 import be.vives.findrobert.ui.loginscreen.LoginScreen
@@ -185,12 +186,18 @@ fun FindRobApp(navController: NavHostController = rememberNavController(), funct
                 )
             }
             composable(route = FindRobertScreens.Main.name) {
-                showAdmin = true;
+                showAdmin = if (MyConfiguration.loggedInUser != null) {
+                    MyConfiguration.loggedInUser!!.userName == "admin" &&
+                            MyConfiguration.loggedInUser!!.password == "admin"
+                } else {
+                    false;
+                }
                 MainScreen(
                     modifier = Modifier.fillMaxSize(),
                     onFoundButtonClicked = { navController.navigate(FindRobertScreens.Scanner.name) }
                 )
             }
+
             composable(route = FindRobertScreens.Scanner.name) {
                 showAdmin = false;
                 ScannerCompose(
